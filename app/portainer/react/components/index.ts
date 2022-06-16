@@ -12,6 +12,7 @@ import {
   DefaultRegistryDomain,
   DefaultRegistryName,
 } from '@/react/portainer/registries/ListView/DefaultRegistry';
+import { InternalAuth } from '@/react/portainer/settings/AuthenticationView/InternalAuth';
 
 import { PageHeader } from '@@/PageHeader';
 import { TagSelector } from '@@/TagSelector';
@@ -111,7 +112,8 @@ export const componentsModule = angular
     ])
   )
   .component('settingsFdo', r2a(SettingsFDO, ['onSubmit', 'settings']))
+  .component('settingsOpenAmt', r2a(SettingsOpenAMT, ['onSubmit', 'settings']))
   .component(
-    'settingsOpenAmt',
-    r2a(SettingsOpenAMT, ['onSubmit', 'settings'])
+    'internalAuth',
+    r2a(InternalAuth, ['onSaveSettings', 'isLoading', 'value', 'onChange'])
   ).name;
