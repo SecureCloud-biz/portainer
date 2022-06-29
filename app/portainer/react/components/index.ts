@@ -17,6 +17,7 @@ import { DashboardItem } from '@@/DashboardItem';
 import { SearchBar } from '@@/datatables/SearchBar';
 import { FallbackImage } from '@@/FallbackImage';
 import { BadgeIcon } from '@@/BoxSelector/BadgeIcon';
+import { TeamsSelector } from '@@/TeamsSelector';
 
 import { fileUploadField } from './file-upload-field';
 import { switchField } from './switch-field';
@@ -98,5 +99,17 @@ export const componentsModule = angular
       'resourceControl',
       'resourceId',
       'resourceType',
+    ])
+  )
+  .component(
+    'teamsSelector',
+    r2a(TeamsSelector, [
+      'onChange',
+      'value',
+      'dataCy',
+      'inputId',
+      'name',
+      'placeholder',
+      'teams',
     ])
   ).name;
