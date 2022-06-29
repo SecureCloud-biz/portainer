@@ -5,6 +5,8 @@ import { r2a } from '@/react-tools/react2angular';
 import { Icon } from '@/react/components/Icon';
 import { ReactQueryDevtoolsWrapper } from '@/react/components/ReactQueryDevtoolsWrapper';
 import { AccessControlPanel } from '@/react/portainer/access-control';
+import { PorAccessControlFormTeamSelector } from '@/react/portainer/access-control/PorAccessControlForm/TeamsSelector';
+import { PorAccessControlFormUserSelector } from '@/react/portainer/access-control/PorAccessControlForm/UsersSelector';
 
 import { PageHeader } from '@@/PageHeader';
 import { TagSelector } from '@@/TagSelector';
@@ -111,5 +113,23 @@ export const componentsModule = angular
       'name',
       'placeholder',
       'teams',
+    ])
+  )
+  .component(
+    'porAccessControlFormTeamSelector',
+    r2a(PorAccessControlFormTeamSelector, [
+      'inputId',
+      'onChange',
+      'options',
+      'value',
+    ])
+  )
+  .component(
+    'porAccessControlFormUserSelector',
+    r2a(PorAccessControlFormUserSelector, [
+      'inputId',
+      'onChange',
+      'options',
+      'value',
     ])
   ).name;
