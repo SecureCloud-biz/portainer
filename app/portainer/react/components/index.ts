@@ -7,6 +7,7 @@ import { ReactQueryDevtoolsWrapper } from '@/react/components/ReactQueryDevtools
 import { AccessControlPanel } from '@/react/portainer/access-control';
 import { PorAccessControlFormTeamSelector } from '@/react/portainer/access-control/PorAccessControlForm/TeamsSelector';
 import { PorAccessControlFormUserSelector } from '@/react/portainer/access-control/PorAccessControlForm/UsersSelector';
+import { PorAccessManagementUsersSelector } from '@/react/portainer/access-control/AccessManagement/PorAccessManagementUsersSelector';
 
 import { PageHeader } from '@@/PageHeader';
 import { TagSelector } from '@@/TagSelector';
@@ -145,4 +146,8 @@ export const componentsModule = angular
       'options',
       'placeholder',
     ])
+  )
+  .component(
+    'porAccessManagementUsersSelector',
+    r2a(PorAccessManagementUsersSelector, ['onChange', 'options', 'value'])
   ).name;
