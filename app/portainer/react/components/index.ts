@@ -147,6 +147,7 @@ export const componentsModule = angular
       'value',
       'onChange',
       'options',
+      'isMulti',
     ])
   )
   .component(
