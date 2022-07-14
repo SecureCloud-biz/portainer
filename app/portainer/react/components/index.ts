@@ -148,6 +148,7 @@ export const componentsModule = angular
       'onChange',
       'options',
       'isMulti',
+      'isClearable',
     ])
   )
   .component(
