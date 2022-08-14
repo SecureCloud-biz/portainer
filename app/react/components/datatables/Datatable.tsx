@@ -9,7 +9,7 @@ import {
   TableInstance,
   TableState,
 } from 'react-table';
-import { ReactNode } from 'react';
+import { ComponentType, ReactNode } from 'react';
 import { useRowSelectColumn } from '@lineup-lite/hooks';
 
 import { PaginationControls } from '@@/PaginationControls';
@@ -28,7 +28,9 @@ interface DefaultTableSettings
 
 interface TitleOptionsVisible {
   title: string;
-  icon?: string;
+  icon?: ReactNode | ComponentType<unknown>;
+  featherIcon?: boolean;
+
   hide?: never;
 }
 
