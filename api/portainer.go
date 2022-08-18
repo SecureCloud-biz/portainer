@@ -1486,7 +1486,7 @@ const (
 	WebSocketKeepAlive = 1 * time.Hour
 )
 
-var FeatureFlagEdgeRemoteUpdate Feature = "edgeRemoteUpdate"
+const FeatureFlagEdgeRemoteUpdate Feature = "edgeRemoteUpdate"
 
 // List of supported features
 var SupportedFeatureFlags = []Feature{
