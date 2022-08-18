@@ -1447,7 +1447,9 @@ const (
 )
 
 // List of supported features
-var SupportedFeatureFlags = []Feature{}
+var SupportedFeatureFlags = []Feature{
+	"edgeRemoteUpdate",
+}
 
 const (
 	_ AuthenticationMethod = iota
