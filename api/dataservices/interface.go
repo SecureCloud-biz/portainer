@@ -83,6 +83,8 @@ type (
 	}
 
 	EdgeUpdateScheduleService interface {
+		ActiveSchedule(endpointID portainer.EndpointID) (*portainer.EndpointUpdateScheduleRelation, error)
+		ActiveSchedules(endpointIDs []portainer.EndpointID) ([]portainer.EndpointUpdateScheduleRelation, error)
 		List() ([]portainer.EdgeUpdateSchedule, error)
 		Item(ID portainer.EdgeUpdateScheduleID) (*portainer.EdgeUpdateSchedule, error)
 		Create(edgeUpdateSchedule *portainer.EdgeUpdateSchedule) error

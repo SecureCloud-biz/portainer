@@ -286,8 +286,6 @@ type (
 		Created int64 `json:"created" example:"1564897200"`
 		// Created by user id
 		CreatedBy UserID `json:"createdBy" example:"1"`
-		// Version of the edge agent
-		Version string `json:"version" example:"1"`
 	}
 
 	// EdgeUpdateScheduleType represents type of an Edge update schedule
@@ -299,6 +297,10 @@ type (
 		Status EdgeUpdateScheduleStatusType `json:"status" example:"1" enums:"1,2,3"`
 		// Error message if status is failed
 		Error string `json:"error" example:""`
+		// Target version of the edge agent
+		TargetVersion string `json:"targetVersion" example:"1"`
+		// Current version of the edge agent
+		CurrentVersion string `json:"currentVersion" example:"1"`
 	}
 
 	// EdgeUpdateScheduleStatusType represents status type of an Edge update schedule
@@ -482,6 +484,16 @@ type (
 
 	// EndpointType represents the type of an environment(endpoint)
 	EndpointType int
+
+	// EndpointUpdateScheduleRelation represents the relation between an environment(endpoint) and an update schedule
+	EndpointUpdateScheduleRelation struct {
+		EnvironmentID EndpointID                   `json:"environmentId"`
+		ScheduleID    EdgeUpdateScheduleID         `json:"scheduleId"`
+		TargetVersion string                       `json:"targetVersion"`
+		Status        EdgeUpdateScheduleStatusType `json:"status"`
+		Error         string                       `json:"error"`
+		Type          EdgeUpdateScheduleType       `json:"type"`
+	}
 
 	// EndpointRelation represents a environment(endpoint) relation object
 	EndpointRelation struct {

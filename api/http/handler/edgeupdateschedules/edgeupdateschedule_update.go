@@ -14,11 +14,11 @@ import (
 )
 
 type updatePayload struct {
-	Name     string
-	GroupIDs []portainer.EdgeGroupID
-	Type     portainer.EdgeUpdateScheduleType
-	Version  string
-	Time     int64
+	Name         string
+	GroupIDs     []portainer.EdgeGroupID
+	Environments map[portainer.EndpointID]string
+	Type         portainer.EdgeUpdateScheduleType
+	Time         int64
 }
 
 func (payload *updatePayload) Validate(r *http.Request) error {
@@ -34,8 +34,8 @@ func (payload *updatePayload) Validate(r *http.Request) error {
 		return errors.New("Invalid schedule type")
 	}
 
-	if payload.Version == "" {
-		return errors.New("Invalid version")
+	if len(payload.Environments) == 0 {
+		return errors.New("No Environment is scheduled for update")
 	}
 
 	return nil
@@ -79,7 +79,23 @@ func (handler *Handler) update(w http.ResponseWriter, r *http.Request) *httperro
 		item.GroupIDs = payload.GroupIDs
 		item.Time = payload.Time
 		item.Type = payload.Type
-		item.Version = payload.Version
+
+		item.Status = map[portainer.EndpointID]portainer.EdgeUpdateScheduleStatus{}
+		for environmentID, version := range payload.Environments {
+			environment, err := handler.dataStore.Endpoint().Endpoint(environmentID)
+			if err != nil {
+				return httperror.InternalServerError("Unable to retrieve environment from the database", err)
+			}
+
+			if environment.Type != portainer.EdgeAgentOnDockerEnvironment {
+				return httperror.BadRequest("Only standalone docker Environments are supported for remote update", nil)
+			}
+
+			item.Status[environmentID] = portainer.EdgeUpdateScheduleStatus{
+				TargetVersion:  version,
+				CurrentVersion: environment.Agent.Version,
+			}
+		}
 	}
 
 	err = handler.dataStore.EdgeUpdateSchedule().Update(item.ID, item)
