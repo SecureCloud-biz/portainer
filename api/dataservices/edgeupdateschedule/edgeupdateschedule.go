@@ -18,7 +18,7 @@ const (
 type Service struct {
 	connection portainer.Connection
 
-	mu                 sync.RWMutex
+	mu                 sync.Mutex
 	idxActiveSchedules map[portainer.EndpointID]*portainer.EndpointUpdateScheduleRelation
 }
 
@@ -51,16 +51,16 @@ func NewService(connection portainer.Connection) (*Service, error) {
 	return service, nil
 }
 
-func (service *Service) ActiveSchedule(environmentID portainer.EndpointID) (*portainer.EndpointUpdateScheduleRelation, error) {
-	service.mu.RLock()
-	defer service.mu.RUnlock()
+func (service *Service) ActiveSchedule(environmentID portainer.EndpointID) *portainer.EndpointUpdateScheduleRelation {
+	service.mu.Lock()
+	defer service.mu.Unlock()
 
-	return service.idxActiveSchedules[environmentID], nil
+	return service.idxActiveSchedules[environmentID]
 }
 
-func (service *Service) ActiveSchedules(environmentsIDs []portainer.EndpointID) ([]portainer.EndpointUpdateScheduleRelation, error) {
-	service.mu.RLock()
-	defer service.mu.RUnlock()
+func (service *Service) ActiveSchedules(environmentsIDs []portainer.EndpointID) []portainer.EndpointUpdateScheduleRelation {
+	service.mu.Lock()
+	defer service.mu.Unlock()
 
 	schedules := []portainer.EndpointUpdateScheduleRelation{}
 
@@ -70,7 +70,7 @@ func (service *Service) ActiveSchedules(environmentsIDs []portainer.EndpointID) 
 		}
 	}
 
-	return schedules, nil
+	return schedules
 }
 
 // List return an array containing all the items in the bucket.
@@ -146,8 +146,8 @@ func (service *Service) Delete(id portainer.EdgeUpdateScheduleID) error {
 }
 
 func (service *Service) cleanRelation(id portainer.EdgeUpdateScheduleID) {
-	service.mu.RLock()
-	defer service.mu.RUnlock()
+	service.mu.Lock()
+	defer service.mu.Unlock()
 
 	for _, schedule := range service.idxActiveSchedules {
 		if schedule != nil && schedule.ScheduleID == id {
