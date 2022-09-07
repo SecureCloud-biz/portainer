@@ -1,6 +1,6 @@
 import angular from 'angular';
-import { Gpu } from 'Docker/react/views/gpu';
 
+import { Gpu } from '@/docker/react/views/gpu';
 import { ItemView as NetworksItemView } from '@/react/docker/networks/ItemView';
 import { r2a } from '@/react-tools/react2angular';
 
