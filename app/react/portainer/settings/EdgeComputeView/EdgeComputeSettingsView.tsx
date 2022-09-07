@@ -1,6 +1,4 @@
-import { r2a } from '@/react-tools/react2angular';
-
-import { Settings } from '../types';
+import { Settings } from '@/portainer/settings/types';
 
 import { EdgeComputeSettings } from './EdgeComputeSettings';
 import { AutomaticEdgeEnvCreation } from './AutomaticEdgeEnvCreation';
@@ -19,8 +17,3 @@ export function EdgeComputeSettingsView({ settings, onSubmit }: Props) {
     </div>
   );
 }
-
-export const EdgeComputeSettingsViewAngular = r2a(EdgeComputeSettingsView, [
-  'settings',
-  'onSubmit',
-]);

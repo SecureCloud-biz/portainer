@@ -2,21 +2,18 @@ import angular from 'angular';
 
 import { r2a } from '@/react-tools/react2angular';
 import { CreateAccessToken } from '@/react/portainer/account/CreateAccessTokenView';
-import {
-  DefaultRegistryAction,
-  DefaultRegistryDomain,
-  DefaultRegistryName,
-} from '@/react/portainer/registries/ListView/DefaultRegistry';
+import { EdgeComputeSettingsView } from '@/react/portainer/settings/EdgeComputeView/EdgeComputeSettingsView';
 
 import { wizardModule } from './wizard';
 import { teamsModule } from './teams';
 
 export const viewsModule = angular
   .module('portainer.app.react.views', [wizardModule, teamsModule])
-  .component('defaultRegistryName', r2a(DefaultRegistryName, []))
-  .component('defaultRegistryAction', r2a(DefaultRegistryAction, []))
-  .component('defaultRegistryDomain', r2a(DefaultRegistryDomain, []))
   .component(
     'createAccessToken',
     r2a(CreateAccessToken, ['onSubmit', 'onError'])
+  )
+  .component(
+    'settingsEdgeCompute',
+    r2a(EdgeComputeSettingsView, ['onSubmit', 'settings'])
   ).name;

@@ -5,6 +5,13 @@ import { r2a } from '@/react-tools/react2angular';
 import { Icon } from '@/react/components/Icon';
 import { ReactQueryDevtoolsWrapper } from '@/react/components/ReactQueryDevtoolsWrapper';
 import { AccessControlPanel } from '@/react/portainer/access-control';
+import { SettingsFDO } from '@/react/portainer/settings/EdgeComputeView/SettingsFDO';
+import { SettingsOpenAMT } from '@/react/portainer/settings/EdgeComputeView/SettingsOpenAMT';
+import {
+  DefaultRegistryAction,
+  DefaultRegistryDomain,
+  DefaultRegistryName,
+} from '@/react/portainer/registries/ListView/DefaultRegistry';
 
 import { PageHeader } from '@@/PageHeader';
 import { TagSelector } from '@@/TagSelector';
@@ -28,6 +35,9 @@ export const componentsModule = angular
     'tagSelector',
     r2a(TagSelector, ['allowCreate', 'onChange', 'value'])
   )
+  .component('defaultRegistryName', r2a(DefaultRegistryName, []))
+  .component('defaultRegistryAction', r2a(DefaultRegistryAction, []))
+  .component('defaultRegistryDomain', r2a(DefaultRegistryDomain, []))
   .component(
     'portainerTooltip',
     react2angular(Tooltip, ['message', 'position', 'className'])
@@ -99,4 +109,9 @@ export const componentsModule = angular
       'resourceId',
       'resourceType',
     ])
+  )
+  .component('settingsFdo', r2a(SettingsFDO, ['onSubmit', 'settings']))
+  .component(
+    'settingsOpenAmt',
+    r2a(SettingsOpenAMT, ['onSubmit', 'settings'])
   ).name;
